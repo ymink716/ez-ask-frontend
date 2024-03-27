@@ -14,7 +14,7 @@ const router = createBrowserRouter([
       { path: '/', element: <MainPage /> },
       { path: '/login', element: <GoogleLoginPage /> },
       { path: '/profile', element: <ProfilePage /> },
-      { path: '/question/:questionId', element: <QuestionDetailPage />}
+      { path: '/questions/:questionId', element: <QuestionDetailPage />}
     ]
   }
 ])

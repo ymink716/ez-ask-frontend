@@ -10,7 +10,6 @@ const MainPage = () => {
     axios.get(`http://localhost:3000/api/questions`)
     .then(response => {
       setQuestions(response.data);
-      console.log(questions);
     })
     .catch(error => {
       console.error(error);
