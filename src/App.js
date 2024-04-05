@@ -4,11 +4,12 @@ import GoogleLoginPage from './pages/GoogleLoginPage';
 import ProfilePage from './pages/ProfilePage';
 import QuestionDetailPage from './pages/QuestionDetailPage';
 import ErrorPage from './pages/ErrorPage';
+import RootLayout from './layout/RootLayout';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    // element: <RootLayout />,
+    element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
       { path: '/', element: <MainPage /> },
