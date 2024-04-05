@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
+import { BiCategory } from "react-icons/bi";
+import { RiLoginBoxLine } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 function Header() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
+
+  const navigate = useNavigate();
+
+  const handleCategoryButtonClick = () => {
+    setIsSidebarOpen(!isSidebarOpen); 
+  };
+
+  const handleLogoButtonClick = () => {
+    navigate('/');
+  }
+
+  const handleLoginButtonClick = () => {
+    navigate('/login');
+  };
+
   return (
     <header className="header">
-      <div className="header__left">
-        <button className="header__categoryButton">카테고리</button>
+      <div className="header_left">
+        <button className="header_category_button" onClick={handleCategoryButtonClick}><BiCategory /></button>
       </div>
-      <div className="header__center">
-        <img src="ez-ask-logo.png" alt="ez-ask Logo" className="header__logo" />
+      <div className="header_center" onClick={handleLogoButtonClick}>ez-ask</div>
+      <div className="header_right">
+        <button className="header_login_button" onClick={handleLoginButtonClick}><RiLoginBoxLine /></button>
       </div>
-      <div className="header__right">
-        <button className="header__loginButton">로그인</button>
-      </div>
+
+      {/* 사이드바 */}
+      {isSidebarOpen && (<Sidebar />)}
     </header>
   );
 }
