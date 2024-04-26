@@ -1,0 +1,30 @@
+/* QuestionList.css */
+
+.question-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.question-card h3 {
+  margin-bottom: 10px;
+}
+
+.question-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  margin-right: auto;
+}
+
+.counts {
+  display: flex;
+}
+
+.counts p {
+  margin-left: 10px;
+}

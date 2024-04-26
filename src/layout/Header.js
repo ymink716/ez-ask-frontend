@@ -3,7 +3,6 @@ import './Header.css';
 import { BiCategory } from "react-icons/bi";
 import { RiLoginBoxLine } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
-import Sidebar from './Sidebar';
 
 function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
@@ -15,7 +14,7 @@ function Header() {
   };
 
   const handleLogoButtonClick = () => {
-    navigate('/');
+    navigate(0);
   }
 
   const handleLoginButtonClick = () => {
@@ -31,9 +30,6 @@ function Header() {
       <div className="header_right">
         <button className="header_login_button" onClick={handleLoginButtonClick}><RiLoginBoxLine /></button>
       </div>
-
-      {/* 사이드바 */}
-      {isSidebarOpen && (<Sidebar />)}
     </header>
   );
 }
