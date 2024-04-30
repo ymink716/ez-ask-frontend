@@ -1,34 +1,18 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import '../App.css';
 import axios from 'axios';
+import SearchBar from '../components/SearchBar';
+import EmptyistAlarm from '../components/EmptyListAlarm';
 
 const BASE_URL = `http://localhost:3000`;
 
 const MainPage = () => {
   const [questions, setQuestions] = useState([]); 
-  const [searchWord, setSearchWord] = useState('');
   const [page, setPage] = useState(1);
   const [load, setLoad] = useState(false);
   const preventRef = useRef(true);
   const obsRef = useRef(null);
   const endRef = useRef(false);
-
-  // const handleSearch = (event) => {
-  //   event.preventDefault();
-
-  //   if (searchWord.length < 2 || searchWord.length > 10) {
-  //     alert(`검색어는 2글자 이상 10글자 이하여야 합니다.`);
-  //     return;
-  //   }
-    
-  //   axios.get(`http://localhost:3000/api/questions?search=${searchWord}`)
-  //   .then(response => {
-  //     setQuestions(response.data);
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   })
-  // };
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver, { threshold: 0.5 });
@@ -53,7 +37,6 @@ const MainPage = () => {
     }
   });
 
-
   const getQuestions = useCallback(async () => {
     setLoad(true);
 
@@ -69,7 +52,6 @@ const MainPage = () => {
       }
       if (response.data.length === 0) {
         endRef.current = true;
-        // noQuestionsShow();     
       }
     } catch (error) {
       console.error(error);
@@ -79,22 +61,11 @@ const MainPage = () => {
     }
   }, [page]);
 
-
   return (
     <>
-      {/* <div>
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            value={searchWord}
-            onChange={(e) => setSearchWord(e.target.value)}
-            placeholder="검색어를 입력하세요..."
-            minLength={2}
-            maxLength={10}
-          />
-          <button type="submit">검색</button>
-        </form>
-      </div> */}
+      <SearchBar placeholder='검색어를 입력하세요...' />
+
+      {questions.length === 0 && <EmptyListAlarm />}
       
       {questions && questions.map(question => (
         <div className='question-card' key={question.id}>
