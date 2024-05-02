@@ -14,7 +14,7 @@ function Header() {
   };
 
   const handleLogoButtonClick = () => {
-    navigate(0);
+    navigate('/');
   }
 
   const handleLoginButtonClick = () => {

@@ -13,6 +13,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: '/', element: <MainPage /> },
+      { path: '/questions', element: <MainPage /> },
       { path: '/login', element: <GoogleLoginPage /> },
       { path: '/profile', element: <ProfilePage /> },
       { path: '/questions/:questionId', element: <QuestionDetailPage />}
