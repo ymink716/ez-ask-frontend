@@ -14,7 +14,7 @@ function Header() {
   };
 
   const handleLogoButtonClick = () => {
-    navigate('/');
+    window.location.replace('/');
   }
 
   const handleLoginButtonClick = () => {

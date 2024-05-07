@@ -1,9 +1,9 @@
 import React from 'react';
-import './Question.css';
+import './QuestionCard.css';
 
-function Question({ question }) {
+function QuestionCard({ question, index }) {
   return (
-    <div className='question-card' key={question.id}>
+    <div className='question-card'>
       <h3>Q. {question.title}</h3>
       <div className='question-info'>
         <p className='date'>{new Date(question.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -17,4 +17,4 @@ function Question({ question }) {
   )
 }
 
-export default Question;
+export default QuestionCard;

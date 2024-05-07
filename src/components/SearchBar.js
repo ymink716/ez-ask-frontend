@@ -17,7 +17,7 @@ function SearchBar(props) {
     if (searchKeyword) {
       navigate(`/questions?search=${searchKeyword}`)
     } else {
-      navigate('/')
+      window.location.replace('/');
     }
   };
 
@@ -29,7 +29,9 @@ function SearchBar(props) {
           value={searchKeyword}
           onChange={onChangeHandler}
           placeholder={props.placeholder}
+          minLength={1}
           maxLength={10}
+          
         />
         <button type="submit">
           <BsSearch />

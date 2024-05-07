@@ -4,6 +4,7 @@ import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import EmptyListAlarm from '../components/EmptyListAlarm';
 import { useSearchParams, useLocation } from 'react-router-dom';
+import QuestionCard from '../components/QuestionCard';
 
 const BASE_URL = `http://localhost:3000`;
 
@@ -56,7 +57,7 @@ const MainPage = () => {
   }, [page, path, search]);
 
   const getQuestions = useCallback(async () => {
-    const keyword = searchParams.get('search');
+    const keyword = decodeURI(searchParams.get('search'));
     const endpoint = keyword && keyword.length > 0 
       ? `/api/questions?search=${keyword}&page=${page}`
       : `/api/questions?page=${page}`;
@@ -91,25 +92,19 @@ const MainPage = () => {
     }
   });
 
+  const renderQuestions = questions.map((question, index) => {
+    return (
+      <QuestionCard question={question} key={index} />
+    )
+  });
+
   return (
     <>
       <SearchBar placeholder='검색어를 입력하세요...' purpose='questions' />
 
-      {!isLoading && questions.length === 0 && <EmptyListAlarm />}
+      {!isLoading && questions.length === 0 && search && <EmptyListAlarm />}
 
-      {questions && questions.map(question => (
-        <div className='question-card' key={question.id}>
-          <h3>Q. {question.title}</h3>
-          <div className='question-info'>
-            <p className='date'>{new Date(question.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-            <div className='counts'>
-              <p>좋아요 {question.likes}</p>
-              <p>북마크 {question.bookmarks}</p>
-              <p>댓글 {question.comments}</p>
-            </div>
-          </div>
-        </div>
-      ))}
+      {renderQuestions}
 
       {isLoading && <p className='spinner'>Loading...</p>}
 
