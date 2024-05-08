@@ -10,31 +10,31 @@ import LoadingAlarm from '../components/LoadingAlarm';
 const BASE_URL = `http://localhost:3000`;
 
 const MainPage = () => {
-  const [questions, setQuestions] = useState([]); 
-  const [page, setPage] = useState(0);
+  const [questions, setQuestions] = useState([]);
+  const [page, setPage] = useState(1); // 페이지를 1로 초기화합니다.
 
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const obsRef = useRef(null);
   const preventRef = useRef(true);
   const endRef = useRef(false);
-  
+
   const location = useLocation();
   const path = location.pathname;
   const search = location.search;
-  
+
   const [previousPath, setPreviousPath] = useState(path);
   const [previousSearch, setPreviousSearch] = useState(search);
-  
+
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleObserver = ((entries) => {
+  const handleObserver = (entries) => {
     const target = entries[0];
 
     if (!endRef.current && target.isIntersecting && preventRef.current) {
       preventRef.current = false;
-      setPage(prev => prev + 1);
+      setPage((prev) => prev + 1);
     }
-  });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver, { threshold: 0.5 });
@@ -43,38 +43,38 @@ const MainPage = () => {
       observer.observe(obsRef.current);
     }
 
-    return () => { observer.disconnect(); }
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
     if (path !== previousPath || search !== previousSearch) {
-      setPage(1);
+      setPage(1); // 페이지를 1로 재설정합니다.
       setQuestions([]);
     }
 
     setPreviousPath(path);
     setPreviousSearch(search);
-    
+
     getQuestions();
   }, [page, path, search]);
 
   const getQuestions = useCallback(async () => {
     const keyword = decodeURI(searchParams.get('search'));
-    const endpoint = keyword && keyword.length > 0 
-      ? `/api/questions?search=${keyword}&page=${page}`
-      : `/api/questions?page=${page}`;
+    const endpoint = keyword && keyword.length > 0 ? `/api/questions?search=${keyword}&page=${page}` : `/api/questions?page=${page}`;
 
-    setisLoading(true);
+    setIsLoading(true);
 
     try {
       const response = await axios({
-        method: 'GET', 
-        url: `${BASE_URL}${endpoint}` 
+        method: 'GET',
+        url: `${BASE_URL}${endpoint}`,
       });
 
       if (response.data) {
         if (page > 1) {
-          setQuestions(prev => [...prev, ...response.data]);
+          setQuestions((prev) => [...prev, ...response.data]);
         } else {
           setQuestions(response.data);
         }
@@ -83,21 +83,19 @@ const MainPage = () => {
       } else {
         if (page === 1) {
           setQuestions([]);
-        }  
+        }
 
         endRef.current = true;
       }
     } catch (error) {
       console.error(error);
     } finally {
-      setisLoading(false);
+      setIsLoading(false);
     }
-  });
+  }, [page, searchParams]);
 
   const renderQuestions = questions.map((question, index) => {
-    return (
-      <QuestionCard question={question} key={index} />
-    )
+    return <QuestionCard question={question} key={index} />;
   });
 
   return (
@@ -110,7 +108,7 @@ const MainPage = () => {
 
       {isLoading && <LoadingAlarm />}
 
-      <div className='observer' ref={obsRef} style={{ width: '100%', height: "30px" }}></div>
+      <div className='observer' ref={obsRef} style={{ width: '100%', height: '30px' }}></div>
     </>
   );
 };
