@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
+import './SearchBar.css';
 
 function SearchBar(props) {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -22,9 +23,10 @@ function SearchBar(props) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleKeywordSubmit}>
+    <div className="searchbar">
+      <form className="search-form" onSubmit={handleKeywordSubmit}>
         <input
+          className="search-input"
           type="text"
           value={searchKeyword}
           onChange={onChangeHandler}
@@ -33,10 +35,11 @@ function SearchBar(props) {
           maxLength={10}
           
         />
-        <button type="submit">
+        <button className="search-button" type="submit">
           <BsSearch />
         </button>
       </form>
+      <hr/>
     </div>
   )
 }

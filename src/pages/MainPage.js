@@ -5,6 +5,7 @@ import SearchBar from '../components/SearchBar';
 import EmptyListAlarm from '../components/EmptyListAlarm';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import QuestionCard from '../components/QuestionCard';
+import LoadingAlarm from '../components/LoadingAlarm';
 
 const BASE_URL = `http://localhost:3000`;
 
@@ -106,7 +107,7 @@ const MainPage = () => {
 
       {renderQuestions}
 
-      {isLoading && <p className='spinner'>Loading...</p>}
+      {isLoading && <LoadingAlarm />}
 
       <div className='observer' ref={obsRef} style={{ width: '100%', height: "30px" }}></div>
     </>
