@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './QuestionDetail.css';
 
 const QuestionDetailPage = () => {
   const params = useParams();
@@ -39,16 +40,20 @@ const QuestionDetailPage = () => {
 
   return (
     <div id='question-detail'>
-      <div>질문 상세 페이지 {questionId}</div>
-      <p>Q. {title}</p>
-      <p>내용. {content}</p>
-      <p>생성일 {new Date(createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-      <p>작성자 {nickname}</p>
-      <p>북마크 수. {bookmarks.length}</p>
-      <p>좋아요 수. {likes.length}</p>
-      <p>댓글 수. {comments.length}</p>
+      <div id='question-detail-header'>
+        <h2 id='question-title'>Q. {title}</h2>
+        <p id='question-createdAt'>{new Date(createdAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</p>
+        <p id='question-writer'>{nickname}</p>
+      </div>
+      <div id='question-detail-content'>
+        <p id='question-content'>{content}</p>
+      </div>
+      <div id='question-detail-footer'>
+        <p id='question-bookmark-count'>북마크 {bookmarks.length}</p>
+        <p id='question-like-count'>좋아요 {likes.length}</p>
+        <p id='question-comment-count'>댓글 {comments.length}</p>
+      </div>
     </div>
-    
   )
 }
 

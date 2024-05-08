@@ -1,0 +1,53 @@
+#question-detail {
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#question-detail-header {
+  margin-bottom: 20px;
+}
+
+#question-title {
+  margin-bottom: 5px;
+}
+
+#question-createdAt, #question-writer {
+  display: inline-block;
+  font-size: 14px;
+}
+
+#question-createdAt {
+  float: left;
+}
+
+#question-writer {
+  float: right;
+}
+
+#question-detail-content {
+  padding: 10px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+#question-content {
+  border: 1px solid #ccc;
+  padding: 10px; 
+  min-height: 300px; 
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#question-detail-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#question-bookmark-count,
+#question-like-count,
+#question-comment-count {
+  font-size: 14px;
+}
