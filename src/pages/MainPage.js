@@ -49,6 +49,7 @@ const MainPage = () => {
   useEffect(() => {
     if (path !== previousPath || search !== previousSearch) {
       setPage(1);
+      setQuestions([]);
     }
 
     setPreviousPath(path);

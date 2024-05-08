@@ -38,7 +38,7 @@ const QuestionDetailPage = () => {
   }, []);
 
   return (
-    <>
+    <div id='question-detail'>
       <div>질문 상세 페이지 {questionId}</div>
       <p>Q. {title}</p>
       <p>내용. {content}</p>
@@ -47,7 +47,7 @@ const QuestionDetailPage = () => {
       <p>북마크 수. {bookmarks.length}</p>
       <p>좋아요 수. {likes.length}</p>
       <p>댓글 수. {comments.length}</p>
-    </>
+    </div>
     
   )
 }

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import './SearchBar.css';
 
@@ -7,6 +7,18 @@ function SearchBar(props) {
   const [searchKeyword, setSearchKeyword] = useState('');
 
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const search = searchParams.get('search');
+    
+    if (search) {
+      setSearchKeyword(search);
+    } else {
+      setSearchKeyword('');
+    }
+  }, [searchParams]);
+  
 
   const onChangeHandler = (e) => {
     setSearchKeyword(e.target.value);
@@ -32,8 +44,7 @@ function SearchBar(props) {
           onChange={onChangeHandler}
           placeholder={props.placeholder}
           minLength={1}
-          maxLength={10}
-          
+          maxLength={10}          
         />
         <button className="search-button" type="submit">
           <BsSearch />
