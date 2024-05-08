@@ -1,4 +1,6 @@
 import React from 'react';
+import './Footer.css';
+import { IoHomeOutline } from "react-icons/io5";
 
 function Footer() {
   const handleHomeButtonClick = () => {
@@ -9,7 +11,7 @@ function Footer() {
     <footer className='footer'>
       <div className='footer_center'>
         <button className='footer_home_button' onClick={handleHomeButtonClick}>
-          홈으로
+          <IoHomeOutline className='footer_home_button' />
         </button>
       </div> 
     </footer>

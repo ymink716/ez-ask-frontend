@@ -1,0 +1,23 @@
+.footer {
+  position: fixed;
+  background-color: #333;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+}
+
+.footer_center {
+  text-align: center;
+}
+
+.footer_home_button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 20px; 
+  padding: 5px 8px;
+  transition: background-color 0.3s ease;
+}

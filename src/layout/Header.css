@@ -21,7 +21,7 @@
   text-align: right;
 }
 
-.header_category_button, .header_login_button {
+.header_login_button {
   background-color: transparent;
   color: #fff;
   border: none;
@@ -32,6 +32,6 @@
   transition: background-color 0.3s ease;
 }
 
-.header_category_button:hover, .header_login_button:hover {
+.header_login_button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }

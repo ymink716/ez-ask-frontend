@@ -11,10 +11,7 @@ function RootLayout() {
       <div className="content-wrapper">
         <Outlet />
       </div>
-      <div className='footer-wrapper'>
-        <Footer />
-      </div>
-      
+      <Footer />
     </>
   );
 }
