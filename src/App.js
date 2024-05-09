@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainPage from './pages/MainPage';
-import GoogleLoginPage from './pages/GoogleLoginPage';
+import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import QuestionDetailPage from './pages/QuestionDetailPage';
 import ErrorPage from './pages/ErrorPage';
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <MainPage /> },
       { path: '/questions', element: <MainPage /> },
-      { path: '/login', element: <GoogleLoginPage /> },
+      { path: '/login', element: <LoginPage /> },
       { path: '/profile', element: <ProfilePage /> },
       { path: '/questions/:questionId', element: <QuestionDetailPage />}
     ]
