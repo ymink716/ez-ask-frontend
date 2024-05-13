@@ -6,6 +6,7 @@ import QuestionDetailPage from './pages/QuestionDetailPage';
 import ErrorPage from './pages/ErrorPage';
 import RootLayout from './layout/RootLayout';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import TokenRefresher from './components/TokenRefresher';
 
 const router = createBrowserRouter([
   {
@@ -18,13 +19,14 @@ const router = createBrowserRouter([
       { path: '/login', element: <LoginPage /> },
       { path: '/profile', element: <ProfilePage /> },
       { path: '/questions/:questionId', element: <QuestionDetailPage />}
-    ]
+    ],
   }
 ])
 
 function App() {
   return (
     <GoogleOAuthProvider clientId={process.env.REACT_APP_OAUTH_GOOGLE_ID}>
+      <TokenRefresher />
       <RouterProvider router={router}/>
     </GoogleOAuthProvider>
   );
