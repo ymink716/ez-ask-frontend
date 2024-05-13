@@ -1,22 +1,41 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 import './LoginPage.css';
-
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  const handleGoogleLogin = useGoogleLogin({
+    scope: "email profile",
+    onSuccess: async ({ code }) => {
+      axios.post(
+        `http://localhost:3000/api/auth/login/google`,
+        { code }
+      )
+      .then(response => {
+        console.log(response);
+        localStorage.clear();
+        localStorage.setItem('access_token', response.data.tokens.accessToken);
+        localStorage.setItem('refresh_token', response.data.tokens.refreshToken);
 
-  const handleGoogleLogin = () => {
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?
-		client_id=${process.env.OAUTH_GOOGLE_ID}
-		&redirect_uri=${process.env.REACT_APP_GOOGLE_AUTH_REDIRECT_URI}
-		&response_type=code
-		&scope=email profile`;
-  };
+        if (response.data.isNew) {
+          alert('정상적으로 가입되었습니다.');
+        }
+
+        window.location.href = '/';
+      })
+      .catch(error => {
+        console.error(error);
+      })
+    },
+    onError: (errorResponse) => {
+      console.error(errorResponse);
+    },
+    flow: "auth-code",
+  });
 
   return (
-    <div id='login-content-wrapper'>
+    <div id='login-content-wrapper'>      
       <button id='google-login-button' onClick={handleGoogleLogin}>
         <FcGoogle /> Google 계정으로 Login
       </button>

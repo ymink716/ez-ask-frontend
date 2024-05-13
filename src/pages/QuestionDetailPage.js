@@ -12,7 +12,6 @@ const QuestionDetailPage = () => {
   const [createdAt, setCreatedAt] = useState("");
   const [nickname, setNickname] = useState("");
   const [bookmarks, setBookmarks] = useState([]);
-  const [likes, setLikes] = useState([]);
   const [comments, setComments] = useState([]);
   
   const fetchQuestion = () => {
@@ -26,7 +25,6 @@ const QuestionDetailPage = () => {
       setCreatedAt(question.createdAt);
       setNickname(question.user.nickname);
       setBookmarks(question.bookmarks);
-      setLikes(question.likes);
       setComments(question.comments);
     })
     .catch(error => {
@@ -50,7 +48,6 @@ const QuestionDetailPage = () => {
       </div>
       <div id='question-detail-footer'>
         <p id='question-bookmark-count'>북마크 {bookmarks.length}</p>
-        <p id='question-like-count'>좋아요 {likes.length}</p>
         <p id='question-comment-count'>댓글 {comments.length}</p>
       </div>
     </div>
