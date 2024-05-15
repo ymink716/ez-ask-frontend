@@ -18,13 +18,9 @@ function Header() {
   const handleLogoutButtonClick = () => {
     localStorage.clear();
     alert('로그아웃 되었습니다.');
-    navigate('/');
+    window.location.replace('/');
   }
 
-
-  // 조건부 렌더링
-  // 로그인 안했을 시: 로그인 버튼
-  // 로그인 했을 시: 로그아웃 버튼
   return (
     <header className="header">
       <div className="header_left"></div>

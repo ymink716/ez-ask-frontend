@@ -9,6 +9,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import TokenRefresher from './interceptors/TokenRefresher';
 import AuthenticatedRoute from './routes/AuthenticatedRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
+import CreateQeustionPage from './pages/CreateQeustionPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           { path: '/profile', element: <ProfilePage /> },
+          { path: '/questions/write', element: <CreateQeustionPage />}
         ]
       },
 

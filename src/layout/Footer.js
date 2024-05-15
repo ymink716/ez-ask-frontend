@@ -1,22 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Footer.css';
 import { IoHomeOutline } from "react-icons/io5";
+import { IoMdCreate } from "react-icons/io";
+import { FaUser } from "react-icons/fa";
 
 function Footer() {
+  const [isLogin, setIsLogin] = useState(false);
+  const ACCESS_TOKEN = localStorage.getItem('access_token');
+  useEffect(() => {
+    if (ACCESS_TOKEN) {
+      setIsLogin(true);
+    }
+  }, [ACCESS_TOKEN])
+  
   const handleHomeButtonClick = () => {
     window.location.replace('/');
   }
   
-  // 조건부 렌더링
-  // 로그인 안했을 시: 홈
-  // 로그인 했을 시: 새 글 작성, 홈, 프로필 
+  const handleWriteQuestionButtonClick = () => {
+    window.location.replace('/questions/write');
+  }
+
+  const handleProfileButtonClick = () => {
+    window.location.replace('/profile');
+  }
+
   return (
     <footer className='footer'>
-      <div className='footer_center'>
-        <button className='footer_home_button' onClick={handleHomeButtonClick}>
-          <IoHomeOutline className='footer_home_button' />
-        </button>
-      </div> 
+      {isLogin
+        ?
+        <div className='footer-wrapper'>
+        <div className='footer_left'>
+          <button onClick={handleWriteQuestionButtonClick}>
+            <IoMdCreate />
+          </button>
+        </div>
+        <div className='footer_center'>
+          <button onClick={handleHomeButtonClick}>
+            <IoHomeOutline />
+          </button>
+        </div>
+        <div className='footer_right'>
+          <button onClick={handleProfileButtonClick}>
+            <FaUser />
+          </button>
+        </div>
+        </div>
+        :
+        <div className='footer-wrapper'>
+        <div className='footer_left'>
+        </div>
+        <div className='footer_center'>
+          <button onClick={handleHomeButtonClick}>
+            <IoHomeOutline />
+          </button>
+        </div>
+        <div className='footer_right'>  
+        </div>
+        </div>
+      }
     </footer>
   );
 }

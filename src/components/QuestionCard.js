@@ -11,7 +11,9 @@ function QuestionCard({ question }) {
   
   return (
     <div className='question-card' onClick={handleClickCard}>
-      <h3>Q. {question.title}</h3>
+      <div className='question-card-header'>
+        <h3>Q. {question.title}</h3>
+      </div>
       <div className='question-info'>
         <p className='date'>{new Date(question.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         <div className='counts'>

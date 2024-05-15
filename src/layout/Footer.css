@@ -5,19 +5,48 @@
   right: 0;
   bottom: 0;
   color: #fff;
+  min-height: 7%;
+}
+
+.footer-wrapper {
+  display: flex;
+}
+
+.footer_left,
+.footer_center,
+.footer_right {
+  text-align: center;
+  width: 100%;
+}
+
+.footer_left {
+  margin-right: auto;
+  width: 30%;
+  float: left;
 }
 
 .footer_center {
-  text-align: center;
+  float: left;
+  width: 30%;
 }
 
-.footer_home_button {
+.footer_right {
+  margin-left: auto; 
+  float: right;
+  width: 30%;
+}
+
+.footer_left button,
+.footer_center button,
+.footer_right button {
+  width: 100%;
   background-color: transparent;
   color: #fff;
   border: none;
   outline: none;
   cursor: pointer;
-  font-size: 20px; 
-  padding: 5px 8px;
+  font-size: 24px; 
+  padding-top: 15px;
   transition: background-color 0.3s ease;
 }
+
