@@ -5,45 +5,43 @@ const TokenRefresher = () => {
   useEffect(() => {
     const refreshAPI = axios.create({
       baseURL: `http://localhost:3000/api`,
-      headers: {"Content-Type": "application/json"}
+      headers: { "Content-Type": "application/json" }
     });
 
     const interceptor = axios.interceptors.response.use(
-      // 응답 성공
-      (response) => { return response; },
+      // 응답 성공 시 그대로 응답을 반환
+      (response) => { return response },
       
-      async (error) => {
-        console.log(error.response);
+      // 에러 시
+      async (error) => {    
         const originalConfig = error.config; // 기존에 수행하려고 했던 작업
-        const errorName = error.response.data.name; // error msg from backend
-        const status = error.response.status; // 현재 발생한 에러 코드
-  
+        const errorName = error.response.data.error; 
+        const status = error.response.status; 
+        
         if (status === 401) {
-          // access token 재발급 요청
+          // token 재발급 요청
           if (errorName === 'AccessTokenHasExpired') {
-            await axios.post(
-              `http://localhost:3000/api/auth/refresh`,
-              {
-                headers: {
-                  Authorization: `${localStorage.getItem('Authorization')}`,
-                  Refresh: `${localStorage.getItem('refresh_token')}`,
-                },
-              },
-            )
+            await axios({
+              url: `http://localhost:3000/api/auth/refresh`,
+              method: 'post',
+              data: {
+                refresh: `${localStorage.getItem('refresh_token')}`,
+              }
+            })
             .then((response) => {
               localStorage.setItem('access_token', response.data.accessToken);
               localStorage.setItem('refresh_token', response.data.refreshToken);
   
               // 재발급 받은 토큰으로 실패한 요청 재시도
-              originalConfig.headers["authorization"]="Bearer "+response.headers.authorization;
-              
-              // console.log("New access token obtained.");
-              // 새로운 토큰으로 재요청
+              originalConfig.headers["Authorization"]="Bearer "+response.data.accessToken;              
               return refreshAPI(originalConfig);
             })
-            .catch((error) => {
-              console.error('토큰을 갱신하는 동안 에러가 발생했습니다.', error);
+            .then(res => {
+              window.location.reload();
             })
+            // .catch(err => {
+            //   console.error('An error occurred while refreshing the token:', err);
+            // })
           } else if (errorName === 'RefreshTokenHasExpired') {
             localStorage.clear();
             window.alert('세션이 만료되어 로그아웃되었습니다. 다시 로그인해주세요.');
@@ -57,7 +55,8 @@ const TokenRefresher = () => {
         return Promise.reject(error);
       },
     );
-  
+    
+    // 컴포넌트가 사라질 때 설정한 인터셉터 제거 (다른 컴포넌트나 페이지에서 영향 방지)
     return () => {
       axios.interceptors.response.eject(interceptor);
     }
