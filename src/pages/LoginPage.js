@@ -16,6 +16,7 @@ const LoginPage = () => {
         localStorage.clear();
         localStorage.setItem('access_token', data.tokens.accessToken);
         localStorage.setItem('refresh_token', data.tokens.refreshToken);
+        localStorage.setItem('userId', data.user.id);
 
         if (data.isNew) {
           alert('정상적으로 가입되었습니다.');

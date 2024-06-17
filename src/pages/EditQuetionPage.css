@@ -22,7 +22,7 @@
   gap: 20px;
 }
 
-#post-question-form .form-group-title {
+#post-question-form .form-group {
   display: flex;
   align-items: center;
   width: 100%;

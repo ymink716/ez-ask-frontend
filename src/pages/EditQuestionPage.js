@@ -4,7 +4,7 @@ import './PostQuestionPage.css';
 import axios from 'axios';
 import { IoMdCreate } from "react-icons/io";
 
-const PostQuestionPage = () => {
+const EditQuestionPage = () => {
   const { register, handleSubmit, formState: { isValid, errors }, setError } = useForm();
 
   const onValid = (data) => {
@@ -58,14 +58,14 @@ const PostQuestionPage = () => {
   };
 
   return (
-    <div id='post-question'>
-      <div id='post-question-header'>
-        <h2>질문하기</h2>
+    <div id='edit-question'>
+      <div id='edit-question-header'>
+        <h2>수정하기</h2>
       </div>
       
       <div id='post-question-content'>
         <form id='post-question-form' onSubmit={handleSubmit(onSubmit)}>
-          <div className='form-group-title'>
+          <div className='form-group'>
             <label>Q. </label>
             <input 
               type='text'
@@ -110,4 +110,4 @@ const PostQuestionPage = () => {
   )
 }
 
-export default PostQuestionPage;
+export default EditQuestionPage;

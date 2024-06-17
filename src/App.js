@@ -10,6 +10,7 @@ import TokenRefresher from './interceptors/TokenRefresher';
 import AuthenticatedRoute from './routes/AuthenticatedRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
 import PostQuestionPage from './pages/PostQuestionPage';
+import EditQuestionPage from './pages/EditQuestionPage';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,8 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           { path: '/profile', element: <ProfilePage /> },
-          { path: '/questions/write', element: <PostQuestionPage />}
+          { path: '/questions/write', element: <PostQuestionPage />},
+          { path: 'questions/edit/:questionId', element: <EditQuestionPage />},
         ]
       },
 
