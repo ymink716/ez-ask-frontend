@@ -4,6 +4,7 @@ import axios from 'axios';
 import './QuestionDetail.css';
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const QuestionDetailPage = () => {
   const params = useParams();
@@ -17,11 +18,11 @@ const QuestionDetailPage = () => {
   const [comments, setComments] = useState([]);
   const [isWriter, setIsWriter] = useState(false);
 
+  const navigate = useNavigate();
+
   const fetchQuestion = () => {
-    
     axios.get(`http://localhost:3000/api/questions/${questionId}`)
     .then(response => {
-      console.log(response.data);
       const question = response.data;
 
       setTitle(question.title);
@@ -45,7 +46,9 @@ const QuestionDetailPage = () => {
   };
 
   const handleEditButtonClick = (e) => {
-    window.location.replace(`/questions/edit/${questionId}`);
+    navigate(`/questions/edit/${questionId}`, {
+      state: { title, content },
+    });
   } 
 
   const handleDeleteButtonClick = (e) => {
@@ -63,9 +66,18 @@ const QuestionDetailPage = () => {
           window.location.replace('/');
         }
       }).catch((error) => {
-        console.error(error);
-        alert('질문글 삭제에 실패했습니다.');
-      })
+        console.error(error.response);
+
+        if (error.response.data.error === "QuestionNotFound") {
+          alert('해당 질문을 찾을 수 없습니다.');
+          window.location.replace('/');
+        } else if (error.response.data.error === "IsNotQuestionWriter") {
+          alert('접근 권한이 없습니다.');
+          window.location.replace('/');
+        } else {
+          alert('에러가 발생했습니다.');
+        }
+      });
     }
   }
 

@@ -1,11 +1,20 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import './PostQuestionPage.css';
+import './EditQuestionPage.css';
 import axios from 'axios';
 import { IoMdCreate } from "react-icons/io";
+import { useLocation, useParams } from 'react-router-dom';
+
+
 
 const EditQuestionPage = () => {
-  const { register, handleSubmit, formState: { isValid, errors }, setError } = useForm();
+  const location = useLocation();
+  const { title, content } = location.state;
+  const { questionId } = useParams();
+
+  const { register, handleSubmit, formState: { isValid, errors }, setError } = useForm({
+    defaultValues: { title, content }
+  });
 
   const onValid = (data) => {
     let isValid = true;
@@ -36,8 +45,8 @@ const EditQuestionPage = () => {
       return;
     }
 
-    await axios.post(
-      `http://localhost:3000/api/questions`,
+    await axios.put(
+      `http://localhost:3000/api/questions/${questionId}`,
       {
         title: data.title,
         content: data.content
@@ -49,11 +58,17 @@ const EditQuestionPage = () => {
         },
       }
     ).then((response) => {
-      alert('질문 남기기에 성공했습니다.');
-      window.location.replace(`/questions/${response.data.id}`);
+      alert('변경되었습니다!');
+      window.location.replace(`/questions/${questionId}`);
     }).catch((error) => {
-      console.error(error);
-      alert('질문 남기기에 실패했습니다.');
+      console.error(error.response);
+
+      if (error.response.data.error === "IsNotQuestionWriter") {
+        alert('접근 권한이 없습니다.');
+        window.location.replace('/');
+      } else {
+        alert('에러가 발생했습니다.');
+      }
     })
   };
 
@@ -63,9 +78,9 @@ const EditQuestionPage = () => {
         <h2>수정하기</h2>
       </div>
       
-      <div id='post-question-content'>
-        <form id='post-question-form' onSubmit={handleSubmit(onSubmit)}>
-          <div className='form-group'>
+      <div id='edit-question-content'>
+        <form id='edit-question-form' onSubmit={handleSubmit(onSubmit)}>
+          <div className='form-group-title'>
             <label>Q. </label>
             <input 
               type='text'

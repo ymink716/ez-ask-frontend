@@ -1,4 +1,4 @@
-#post-question {
+#edit-question {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,35 +6,35 @@
   font-family: Arial, sans-serif;
 }
 
-#post-question-header {
+#edit-question-header {
   text-align: center;
   margin-bottom: 10px;
 }
 
-#post-question-content {
+#edit-question-content {
   width: 100%;
   max-width: 600px;
 }
 
-#post-question-form {
+#edit-question-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-#post-question-form .form-group {
+#edit-question-form .form-group-title {
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-#post-question-form label {
+#edit-question-form label {
   font-size: 1.5em;
   margin-right: 10px;
 }
 
-#post-question-form input[type="text"],
-#post-question-form textarea {
+#edit-question-form input[type="text"],
+#edit-question-form textarea {
   flex-grow: 1;
   padding: 10px;
   border: 1px solid #ccc;
@@ -44,18 +44,18 @@
   width: 100%;
 }
 
-#post-question-form textarea {
+#edit-question-form textarea {
   min-height: 300px;
 }
 
-#post-question-form input[type="text"]:focus,
-#post-question-form textarea:focus {
+#edit-question-form input[type="text"]:focus,
+#edit-question-form textarea:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-#post-question-form button {
+#edit-question-form button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,7 +69,7 @@
   transition: background-color 0.3s ease;
 }
 
-#post-question-form button:disabled {
+#edit-question-form button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
