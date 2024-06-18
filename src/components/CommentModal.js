@@ -4,9 +4,52 @@ import styles from '../pages/QuestionDetail.module.css';
 import { MdClose } from "react-icons/md";
 import CommentCard from './CommentCard';
 import { TbCalendarSmile } from "react-icons/tb";
+import { useForm } from 'react-hook-form';
+import { TbMessage } from "react-icons/tb";
 
 function CommentModal({setIsModalOpen, questionId}) {
   const [comments, setComments] = useState([]);
+  const { register, handleSubmit, formState: { isValid, errors }, setError } = useForm();
+
+  const onValid = (data) => {
+    let isValid = true;
+
+    if (data.content.trim().length < 2) {
+      setError(
+        'content',
+        { message: '내용은 2글자 이상이어야 합니다.'},
+        { shouldFocus: true },
+      );
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  const onSubmit = async (data) => {
+    if (!onValid(data)) {
+      return;
+    }
+
+    await axios.post(
+      `http://localhost:3000/api/comments`,
+      {
+        content: data.content,
+        questionId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      }
+    ).then((response) => {
+      fetchComments();
+    }).catch((error) => {
+      console.error(error.response);
+      alert('에러가 발생했습니다.');
+    })
+  };
 
   useEffect(() => {
     fetchComments();
@@ -61,16 +104,28 @@ function CommentModal({setIsModalOpen, questionId}) {
       </div>
       
       <div className={styles["comment-modal-footer"]}>
-        <form>
+        <form className='write-comment-form' onSubmit={handleSubmit(onSubmit)}>
           <label><TbCalendarSmile /></label>
           <input 
             type='text'
             placeholder='댓글을 입력해주세요.'
+            {...register('content', { 
+              required: '내용은 2글자 이상 255글자 이하여야 합니다.', 
+              minLength: {
+                value: 2,
+                message: '내용은 2글자 이상이어야 합니다',
+              }, 
+              maxLength: {
+                value: 255,
+                message: '내용은 255글자 이하여야 합니다.',
+              },
+            })}
           >
           </input>
-          <button>
-            입력
-          </button>
+
+          {errors.content && <span>{errors.content.message}</span>}
+          
+          <button type='submit' disabled={!isValid}><TbMessage /></button>
         </form>
       </div>
     </div>
