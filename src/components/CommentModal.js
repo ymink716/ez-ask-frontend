@@ -70,8 +70,35 @@ function CommentModal({setIsModalOpen, questionId}) {
     setIsModalOpen(false);
   }
 
+  const handleDeleteButtonClick = (commentId) => {
+    if (window.confirm('삭제하시겠습니까?')) {
+      axios.delete(`http://localhost:3000/api/comments/${commentId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        }
+      ).then((response) => {
+        if (response.data.success) {
+          alert('삭제되었습니다.');
+          fetchComments();
+        }
+      }).catch((error) => {
+        console.error(error.response);
+
+        if (error.response.data.error === "IsNotCommentor") {
+          alert('접근 권한이 없습니다.');
+          window.location.replace('/');
+        } else {
+          alert('에러가 발생했습니다.');
+        }
+      });
+    }
+  }
+
   const renderComments = comments.map((comment, index) => {
-    return <CommentCard comment={comment} key={index} />
+    return <CommentCard comment={comment} key={index} handleDeleteButtonClick={handleDeleteButtonClick} />
   });
 
   const modalRef = useRef(null);

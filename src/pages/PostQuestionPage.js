@@ -49,11 +49,11 @@ const PostQuestionPage = () => {
         },
       }
     ).then((response) => {
-      alert('질문 남기기에 성공했습니다.');
+      alert('등록되었습니다.');
       window.location.replace(`/questions/${response.data.id}`);
     }).catch((error) => {
       console.error(error);
-      alert('질문 남기기에 실패했습니다.');
+      alert('에러가 발생했습니다.');
     })
   };
 
