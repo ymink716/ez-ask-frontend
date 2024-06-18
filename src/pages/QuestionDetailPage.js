@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './QuestionDetail.css';
+import styles from './QuestionDetail.module.css';
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import { FaCommentDots } from "react-icons/fa";
+import { MdBookmark } from "react-icons/md";
+import CommentModal from '../components/CommentModal';
 
 const QuestionDetailPage = () => {
   const params = useParams();
@@ -19,6 +22,8 @@ const QuestionDetailPage = () => {
   const [isWriter, setIsWriter] = useState(false);
 
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchQuestion = () => {
     axios.get(`http://localhost:3000/api/questions/${questionId}`)
@@ -68,10 +73,7 @@ const QuestionDetailPage = () => {
       }).catch((error) => {
         console.error(error.response);
 
-        if (error.response.data.error === "QuestionNotFound") {
-          alert('해당 질문을 찾을 수 없습니다.');
-          window.location.replace('/');
-        } else if (error.response.data.error === "IsNotQuestionWriter") {
+        if (error.response.data.error === "IsNotQuestionWriter") {
           alert('접근 권한이 없습니다.');
           window.location.replace('/');
         } else {
@@ -85,34 +87,45 @@ const QuestionDetailPage = () => {
     fetchQuestion();
   }, []);
 
+
+
   return (
-    <div id='question-detail'>
-      <div id='question-detail-header'>
-        <h2 id='question-title'>Q. {title}</h2>
-        <p id='question-createdAt'>{new Date(createdAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</p>
-        <p id='question-writer'>{nickname}</p>
+    <div className={styles["question-detail"]}>
+      <div className={styles["question-detail-header"]}>
+        <h2 className={styles["question-title"]}>Q. {title}</h2>
+        <p className={styles["question-createdAt"]}>{new Date(createdAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</p>
+        <p className={styles["question-writer"]}>{nickname}</p>
       </div>
-      <div id='question-detail-content'>
-        <p id='question-content'>{content}</p>
+      <div className={styles["question-detail-content"]}>
+        <p className={styles["question-content"]}>{content}</p>
       </div>
       {isWriter 
         ?
-        <div id='question-detail-footer'>
-          <button id='edit-question-button' onClick={handleEditButtonClick}>
+        <div className={styles["question-detail-footer"]}>
+          <button className={styles["edit-question-button"]} onClick={handleEditButtonClick}>
             <MdEdit />
           </button>
-          <button id='delete-question-button' onClick={handleDeleteButtonClick}>
+          <button className={styles["delete-question-button"]} onClick={handleDeleteButtonClick}>
             <MdDelete />
           </button>
-          <p id='question-bookmark-count'>북마크 {bookmarks.length}</p>
-          <p id='question-comment-count'>댓글 {comments.length}</p>
+          <button className={styles["bookmark-button"]}>
+            <MdBookmark /> {bookmarks.length}
+          </button>
+          <button className={styles["comment-button"]} onClick={() => setIsModalOpen(true)}>
+            <FaCommentDots /> {comments.length}
+          </button>
         </div>      
         :
-        <div id='question-detail-footer'>
-          <p id='question-bookmark-count'>북마크 {bookmarks.length}</p>
-          <p id='question-comment-count'>댓글 {comments.length}</p>
+        <div className={styles["question-detail-footer"]}>
+          <button className={styles["bookmark-button"]}>
+            <MdBookmark /> {bookmarks.length}
+          </button>
+          <button className={styles["comment-button"]} onClick={() => setIsModalOpen(true)}>
+            <FaCommentDots /> {comments.length}
+          </button>
         </div>
       }
+      {isModalOpen && <CommentModal setIsModalOpen={setIsModalOpen} questionId={questionId} />}
     </div>
   )
 }

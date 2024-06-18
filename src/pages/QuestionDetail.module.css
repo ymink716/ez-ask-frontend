@@ -1,0 +1,123 @@
+.question-detail {
+  margin: 0 auto;
+  padding: 10px;
+  max-width: 800px; 
+}
+
+.question-detail-header {
+  margin-bottom: 20px;
+}
+
+.question-title {
+  margin-bottom: 5px;
+}
+
+.question-createdAt, .question-writer {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.question-createdAt {
+  float: left;
+}
+
+.question-writer {
+  float: right;
+}
+
+.question-detail-content {
+  padding: 10px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.question-content {
+  border: 1px solid #ccc;
+  padding: 10px; 
+  min-height: 300px; 
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-detail-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  margin-top: 20px;
+}
+
+.edit-question-button,
+.delete-question-button {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comment-button,
+.bookmark-button {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-question-button:hover,
+.delete-question-button:hover,
+.comment-button:hover,
+.bookmark-button:hover {
+  background-color: #e0e0e0;
+}
+
+.edit-question-button svg,
+.delete-question-button svg,
+.comment-button svg,
+.bookmark-button svg {
+  margin-right: 5px;
+}
+
+.comment-modal-container {
+  /* 모달창 크기 */
+  width: 400px;
+  height: 600px;
+
+  /* 최상단 위치 */
+  z-index: 999;
+  
+  /* 중앙 배치 */
+  /* top, bottom, left, right 는 브라우저 기준으로 작동한다. */
+  /* translate는 본인의 크기 기준으로 작동한다. */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* 모달창 디자인 */
+  background-color: gray;
+  border: 1px solid black;
+  border-radius: 8px
+}
+
+.comment-modal-header {
+
+}
+
+.comment-modal-close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

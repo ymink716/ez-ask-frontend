@@ -1,0 +1,66 @@
+.comment-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 80px; 
+  overflow: hidden; 
+  cursor: pointer; 
+}
+
+.commenter-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 2em;
+  color: #757575;
+}
+
+.comment-info {
+  flex-grow: 1;
+  margin-left: 15px;
+  margin-right: 15px;
+  overflow: hidden; 
+}
+
+.comment-content {
+  font-size: 1em;
+  margin: 0;
+  color: #333;
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+}
+
+.date {
+  font-size: 0.8em;
+  color: #888;
+  margin-top: 5px;
+}
+
+.comment-like-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #555; 
+  font-size: 1.2em;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.comment-like-button:hover {
+  background-color: #e0e0e0;
+}
+
+.comment-like-button svg {
+  margin-right: 5px;
+}
