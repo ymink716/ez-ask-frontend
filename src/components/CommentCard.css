@@ -11,6 +11,7 @@
   min-height: 80px; 
   overflow: hidden; 
   cursor: pointer; 
+  width: 88%;
 }
 
 .commenter-picture {
@@ -44,6 +45,11 @@
   margin-top: 5px;
 }
 
+.comment-buttons {
+  display: flex;
+  align-items: center;
+}
+
 .comment-like-button {
   display: flex;
   align-items: center;
@@ -52,7 +58,6 @@
   cursor: pointer;
   color: #555; 
   font-size: 1.2em;
-  padding: 5px 10px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
@@ -62,5 +67,21 @@
 }
 
 .comment-like-button svg {
-  margin-right: 5px;
+  margin-right: 3px;
+}
+
+.comment-delete-button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #848282; 
+  font-size: 1.2em;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.comment-delete-button:hover {
+  background-color: #f2dede;
 }

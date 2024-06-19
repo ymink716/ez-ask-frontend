@@ -91,33 +91,94 @@
 }
 
 .comment-modal-container {
-  /* 모달창 크기 */
   width: 400px;
   height: 600px;
-
-  /* 최상단 위치 */
   z-index: 999;
-  
-  /* 중앙 배치 */
-  /* top, bottom, left, right 는 브라우저 기준으로 작동한다. */
-  /* translate는 본인의 크기 기준으로 작동한다. */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  /* 모달창 디자인 */
-  background-color: gray;
-  border: 1px solid black;
-  border-radius: 8px
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .comment-modal-header {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+}
 
+.comment-count {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .comment-modal-close-button {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 1px;
+  top: 60%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
+
+.comment-modal-content {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 15px;
+}
+
+.comment-modal-footer {
+  width: 90%;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.write-comment-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.write-comment-form label {
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.write-comment-form input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.write-comment-form button {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.write-comment-form button:disabled {
+  background: #ccc;
+}
+
+.write-comment-form span {
+  color: red;
+  font-size: 0.8rem;
+  margin-left: 10px;
+}
+
+

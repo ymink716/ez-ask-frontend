@@ -120,10 +120,10 @@ function CommentModal({setIsModalOpen, questionId}) {
   return (
     <div ref={modalRef} className={styles["comment-modal-container"]}>
       <div className={styles["comment-modal-header"]}>
+        <div className={styles["comment-count"]}>댓 글 {comments.length}</div>
         <button className={styles["comment-modal-close-button"]} onClick={closeModal}>
           <MdClose />
         </button>
-        <div className={styles["comment-count"]}>댓 글 {comments.length}</div>
       </div>
       
       <div className={styles["comment-modal-content"]}>
@@ -131,7 +131,7 @@ function CommentModal({setIsModalOpen, questionId}) {
       </div>
       
       <div className={styles["comment-modal-footer"]}>
-        <form className='write-comment-form' onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles["write-comment-form"]} onSubmit={handleSubmit(onSubmit)}>
           <label><TbCalendarSmile /></label>
           <input 
             type='text'
@@ -149,9 +149,7 @@ function CommentModal({setIsModalOpen, questionId}) {
             })}
           >
           </input>
-
           {errors.content && <span>{errors.content.message}</span>}
-          
           <button type='submit' disabled={!isValid}><TbMessage /></button>
         </form>
       </div>
