@@ -37,7 +37,6 @@ function BookmarkButton({bookmarks, questionId}) {
           },
         }
       ).then((response) => {
-        console.log(response);
         if (response.data.success) {
           setBookmarked(true);
           setBookmarkCount(bookmarkCount + 1)

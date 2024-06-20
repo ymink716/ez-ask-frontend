@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './CommentCard.css';
 import { RxAvatar } from "react-icons/rx";
-import { AiFillLike } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
+import LikeButton from './LikeButton';
 
 function CommentCard({ comment, handleDeleteButtonClick }) {
   const [showFullContent, setShowFullContent] = useState(false);
@@ -28,18 +28,14 @@ function CommentCard({ comment, handleDeleteButtonClick }) {
       {comment.user.id == localStorage.getItem('userId')
         ?
         <div className='comment-buttons'>
-          <button className='comment-like-button'>
-            <AiFillLike /> {comment.likes.length}
-          </button>
+          {comment.likes && <LikeButton likes={comment.likes} commentId={comment.id} />}
           <button className='comment-delete-button' onClick={() => handleDeleteButtonClick(comment.id)}>
             <MdDelete />
           </button>
         </div>
         :
         <div className='comment-buttons'>
-          <button className='comment-like-button'>
-            <AiFillLike /> {comment.likes.length}
-          </button>
+          {comment.likes && <LikeButton likes={comment.likes} commentId={comment.id} />}
         </div>
       }
     </div>

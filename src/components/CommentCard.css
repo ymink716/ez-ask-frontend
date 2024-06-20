@@ -61,25 +61,7 @@
   align-items: center;
 }
 
-.comment-like-button {
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #555;
-  font-size: 1.2em;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
 
-.comment-like-button:hover {
-  background-color: #e0e0e0;
-}
-
-.comment-like-button svg {
-  margin-right: 3px;
-}
 
 .comment-delete-button {
   display: flex;
