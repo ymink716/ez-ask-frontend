@@ -98,7 +98,7 @@ function CommentModal({setIsModalOpen, questionId}) {
   }
 
   const renderComments = comments.map((comment, index) => {
-    return <CommentCard comment={comment} key={index} handleDeleteButtonClick={handleDeleteButtonClick} />
+    return <CommentCard comment={comment} key={comment.id} handleDeleteButtonClick={handleDeleteButtonClick} />
   });
 
   const modalRef = useRef(null);

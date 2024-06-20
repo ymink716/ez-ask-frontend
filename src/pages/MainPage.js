@@ -95,7 +95,7 @@ const MainPage = () => {
   }, [page, searchParams]);
 
   const renderQuestions = questions.map((question, index) => {
-    return <QuestionCard question={question} key={index} />;
+    return <QuestionCard question={question} key={question.id} />;
   });
 
   return (
