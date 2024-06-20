@@ -20,7 +20,10 @@ function CommentCard({ comment, handleDeleteButtonClick }) {
         <p className='comment-content' style={{ whiteSpace: showFullContent ? 'normal' : 'nowrap', overflow: showFullContent ? 'visible' : 'hidden' }}>
           {comment.content}
         </p>
-        <p className='date'>{new Date(comment.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <div className='comment-info-footer'>
+          <p className='date'>{new Date(comment.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <p className='commenter'>{comment.user.nickname}</p>
+        </div>
       </div>
       {comment.user.id == localStorage.getItem('userId')
         ?

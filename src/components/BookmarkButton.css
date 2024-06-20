@@ -1,0 +1,20 @@
+.bookmark-button {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookmark-button:hover {
+  background-color: #e0e0e0;
+}
+
+.bookmark-button svg {
+  margin-right: 5px;
+}

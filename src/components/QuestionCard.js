@@ -1,6 +1,7 @@
 import React from 'react';
 import './QuestionCard.css';
 import { useNavigate } from "react-router-dom";
+import { FaCommentDots } from "react-icons/fa";
 
 function QuestionCard({ question }) {
   const navigate = useNavigate();
@@ -17,8 +18,7 @@ function QuestionCard({ question }) {
       <div className='question-info'>
         <p className='date'>{new Date(question.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         <div className='counts'>
-          <p>북마크 {question.bookmarks}</p>
-          <p>댓글 {question.comments}</p>
+          <p className='comments-count'><FaCommentDots /> {question.comments}</p>
         </div>
       </div>
     </div>

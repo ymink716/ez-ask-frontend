@@ -7,9 +7,9 @@
 
 .question-card h3 {
   width: 90%;
-  margin-top: 2px;
-  margin-left: 10px;
-  margin-bottom: 2px;
+  margin-top: 5px;
+  margin-left: 15px;
+  margin-bottom: 0px;
 
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -28,9 +28,24 @@
 
 .counts {
   display: flex;
+  float: right;
+  margin-right: 20px;
 }
 
 .counts p {
   margin-left: 10px;
+}
 
+.comments-count {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  float: right;
+}
+
+.comments-count svg {
+  margin-right: 1px;
+  vertical-align: middle;
+  font-size: 16px; 
 }

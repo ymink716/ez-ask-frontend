@@ -2,15 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   background-color: #f9f9f9;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  min-height: 80px; 
-  overflow: hidden; 
-  cursor: pointer; 
+  min-height: 80px;
+  overflow: hidden;
+  cursor: pointer;
   width: 88%;
 }
 
@@ -27,22 +28,32 @@
   flex-grow: 1;
   margin-left: 15px;
   margin-right: 15px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .comment-content {
-  font-size: 1em;
+  font-size: 0.9em;
   margin: 0;
   color: #333;
-  white-space: nowrap; 
-  text-overflow: ellipsis; 
-  overflow: hidden; 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+}
+
+.comment-info-footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .date {
   font-size: 0.8em;
   color: #888;
-  margin-top: 5px;
+}
+
+.commenter {
+  font-size: 0.8em;
+  color: #555;
 }
 
 .comment-buttons {
@@ -56,7 +67,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: #555; 
+  color: #555;
   font-size: 1.2em;
   border-radius: 4px;
   transition: background-color 0.3s ease;
@@ -76,10 +87,11 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: #848282; 
+  color: #848282;
   font-size: 1.2em;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  margin-left: 5px;
 }
 
 .comment-delete-button:hover {

@@ -11,7 +11,7 @@ const BASE_URL = `http://localhost:3000`;
 
 const MainPage = () => {
   const [questions, setQuestions] = useState([]);
-  const [page, setPage] = useState(1); // 페이지를 1로 초기화합니다.
+  const [page, setPage] = useState(1); 
 
   const [isLoading, setIsLoading] = useState(false);
   const obsRef = useRef(null);
@@ -50,7 +50,7 @@ const MainPage = () => {
 
   useEffect(() => {
     if (path !== previousPath || search !== previousSearch) {
-      setPage(1); // 페이지를 1로 재설정합니다.
+      setPage(1); 
       setQuestions([]);
     }
 

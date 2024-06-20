@@ -6,8 +6,8 @@ import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { FaCommentDots } from "react-icons/fa";
-import { MdBookmark } from "react-icons/md";
 import CommentModal from '../components/CommentModal';
+import BookmarkButton from '../components/BookmarkButton';
 
 const QuestionDetailPage = () => {
   const params = useParams();
@@ -17,7 +17,7 @@ const QuestionDetailPage = () => {
   const [content, setContent] = useState("");
   const [createdAt, setCreatedAt] = useState("");
   const [nickname, setNickname] = useState("");
-  const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarks, setBookmarks] = useState();
   const [comments, setComments] = useState([]);
   const [isWriter, setIsWriter] = useState(false);
 
@@ -25,8 +25,8 @@ const QuestionDetailPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchQuestion = () => {
-    axios.get(`http://localhost:3000/api/questions/${questionId}`)
+  const fetchQuestion = async () => {
+    await axios.get(`http://localhost:3000/api/questions/${questionId}`)
     .then(response => {
       const question = response.data;
 
@@ -67,7 +67,7 @@ const QuestionDetailPage = () => {
         }
       ).then((response) => {
         if (response.data.success) {
-          alert('삭제했습니다!');
+          alert('삭제되었습니다.');
           window.location.replace('/');
         }
       }).catch((error) => {
@@ -86,8 +86,6 @@ const QuestionDetailPage = () => {
   useEffect(() => {
     fetchQuestion();
   }, []);
-
-
 
   return (
     <div className={styles["question-detail"]}>
@@ -108,18 +106,14 @@ const QuestionDetailPage = () => {
           <button className={styles["delete-question-button"]} onClick={handleDeleteButtonClick}>
             <MdDelete />
           </button>
-          <button className={styles["bookmark-button"]}>
-            <MdBookmark /> {bookmarks.length}
-          </button>
+          {bookmarks && <BookmarkButton bookmarks={bookmarks} questionId={questionId} />}
           <button className={styles["comment-button"]} onClick={() => setIsModalOpen(true)}>
             <FaCommentDots /> {comments.length}
           </button>
         </div>      
         :
         <div className={styles["question-detail-footer"]}>
-          <button className={styles["bookmark-button"]}>
-            <MdBookmark /> {bookmarks.length}
-          </button>
+          {bookmarks && <BookmarkButton bookmarks={bookmarks} questionId={questionId} />}
           <button className={styles["comment-button"]} onClick={() => setIsModalOpen(true)}>
             <FaCommentDots /> {comments.length}
           </button>
