@@ -40,8 +40,12 @@ function SearchBar(props) {
     
     const order = sortOrder ? sortOrder : 'LATEST';
     
-    if (searchKeyword) {
+    if (searchKeyword && searchKeyword.length > 1) {
       navigate(`/questions?search=${searchKeyword}&sort=${order}`);
+    } else if (!searchKeyword && sortOrder) {
+      navigate(`/questions?sort=${order}`);
+    } else if (searchKeyword && !sortOrder) {
+      navigate(`/questions?search=${searchKeyword}`);
     } else {
       window.location.replace('/');
     }

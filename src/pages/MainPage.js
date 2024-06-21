@@ -61,12 +61,24 @@ const MainPage = () => {
   }, [page, path, search]);
 
   const getQuestions = useCallback(async () => {
-    const keyword = decodeURI(searchParams.get('search'));
-    const sortOrder = decodeURI(searchParams.get('sort'));
-    
-    const endpoint = keyword && keyword.length > 0 
-      ? `/api/questions?search=${keyword}&page=${page}&sort=${sortOrder}` 
-      : `/api/questions?page=${page}`;
+    const keyword = searchParams.get('search');
+    const sortOrder = searchParams.get('sort');
+
+    // const endpoint = keyword && keyword.length > 0 
+    //   ? `/api/questions?search=${keyword}&page=${page}&sort=${sortOrder}` 
+    //   : `/api/questions?page=${page}`;
+
+    let endpoint;    
+    if (keyword && keyword.length > 1 && sortOrder) {
+      endpoint = `/api/questions?search=${decodeURI(keyword)}&page=${page}&sort=${decodeURI(sortOrder)}`;
+    } else if (!keyword && sortOrder) {
+      endpoint = `/api/questions?page=${page}&sort=${decodeURI(sortOrder)}`
+    } else if (keyword && !sortOrder) {
+      endpoint = `/api/questions?search=${decodeURI(keyword)}&page=${page}}`;
+    } else {
+      endpoint = `/api/questions?page=${page}`;
+    }
+    console.log(endpoint);
 
     setIsLoading(true);
 
