@@ -37,7 +37,7 @@ const PostQuestionPage = () => {
     }
 
     await axios.post(
-      `http://localhost:3000/api/questions`,
+      `${process.env.REACT_APP_API_SERVER_URL}/api/questions`,
       {
         title: data.title,
         content: data.content

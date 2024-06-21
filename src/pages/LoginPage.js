@@ -9,7 +9,7 @@ const LoginPage = () => {
     scope: "email profile",
     onSuccess: async ({ code }) => {
       axios.post(
-        `http://localhost:3000/api/auth/login/google`,
+        `${process.env.REACT_APP_API_SERVER_URL}/api/auth/login/google`,
         { code },
       )
       .then(({data}) => {

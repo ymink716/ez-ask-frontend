@@ -32,7 +32,7 @@ function CommentModal({setIsModalOpen, questionId}) {
     }
 
     await axios.post(
-      `http://localhost:3000/api/comments`,
+      `${process.env.REACT_APP_API_SERVER_URL}/api/comments`,
       {
         content: data.content,
         questionId,
@@ -56,7 +56,7 @@ function CommentModal({setIsModalOpen, questionId}) {
   }, []);
 
   const fetchComments = () => {
-    axios.get(`http://localhost:3000/api/comments/question/${questionId}`)
+    axios.get(`${process.env.REACT_APP_API_SERVER_URL}/api/comments/question/${questionId}`)
     .then((response) => {
       setComments(response.data);
     })
@@ -72,7 +72,7 @@ function CommentModal({setIsModalOpen, questionId}) {
 
   const handleDeleteButtonClick = (commentId) => {
     if (window.confirm('삭제하시겠습니까?')) {
-      axios.delete(`http://localhost:3000/api/comments/${commentId}`,
+      axios.delete(`${process.env.REACT_APP_API_SERVER_URL}/api/comments/${commentId}`,
         {
           headers: {
             "Content-Type": "application/json",

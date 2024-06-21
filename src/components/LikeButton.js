@@ -28,7 +28,7 @@ function LikeButton({likes, commentId}) {
   const handleLike = () => {
     if (!liked) {
       axios.post(
-        `http://localhost:3000/api/likes/comments/${commentId}`,
+        `${process.env.REACT_APP_API_SERVER_URL}/api/likes/comments/${commentId}`,
         {},
         {
           headers: {
@@ -50,7 +50,7 @@ function LikeButton({likes, commentId}) {
         }
       })
     } else {
-      axios.delete(`http://localhost:3000/api/likes/comments/${commentId}`,
+      axios.delete(`${process.env.REACT_APP_API_SERVER_URL}/api/likes/comments/${commentId}`,
         {
           headers: {
             "Content-Type": "application/json",

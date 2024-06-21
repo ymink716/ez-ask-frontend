@@ -7,8 +7,6 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import QuestionCard from '../components/QuestionCard';
 import LoadingAlarm from '../components/LoadingAlarm';
 
-const BASE_URL = `http://localhost:3000`;
-
 const MainPage = () => {
   const [questions, setQuestions] = useState([]);
   const [page, setPage] = useState(1); 
@@ -64,10 +62,6 @@ const MainPage = () => {
     const keyword = searchParams.get('search');
     const sortOrder = searchParams.get('sort');
 
-    // const endpoint = keyword && keyword.length > 0 
-    //   ? `/api/questions?search=${keyword}&page=${page}&sort=${sortOrder}` 
-    //   : `/api/questions?page=${page}`;
-
     let endpoint;    
     if (keyword && keyword.length > 1 && sortOrder) {
       endpoint = `/api/questions?search=${decodeURI(keyword)}&page=${page}&sort=${decodeURI(sortOrder)}`;
@@ -78,14 +72,13 @@ const MainPage = () => {
     } else {
       endpoint = `/api/questions?page=${page}`;
     }
-    console.log(endpoint);
 
     setIsLoading(true);
 
     try {
       const response = await axios({
         method: 'GET',
-        url: `${BASE_URL}${endpoint}`,
+        url: `${process.env.REACT_APP_API_SERVER_URL}${endpoint}`,
       });
 
       if (response.data) {

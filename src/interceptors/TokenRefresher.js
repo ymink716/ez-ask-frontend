@@ -4,7 +4,7 @@ import axios from 'axios';
 const TokenRefresher = () => {
   useEffect(() => {
     const refreshAPI = axios.create({
-      baseURL: `http://localhost:3000/api`,
+      baseURL: `${process.env.REACT_APP_API_SERVER_URL}/api`,
       headers: { "Content-Type": "application/json" }
     });
 
@@ -22,7 +22,7 @@ const TokenRefresher = () => {
           // token 재발급 요청
           if (errorName === 'AccessTokenHasExpired') {
             await axios({
-              url: `http://localhost:3000/api/auth/refresh`,
+              url: `${process.env.REACT_APP_API_SERVER_URL}/api/auth/refresh`,
               method: 'post',
               data: {
                 refresh: `${localStorage.getItem('refresh_token')}`,

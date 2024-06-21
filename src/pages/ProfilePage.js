@@ -12,7 +12,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     axios.get(
-      `http://localhost:3000/api/users/profile`,
+      `${process.env.REACT_APP_API_SERVER_URL}/api/users/profile`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (activeTab === 'bookmarks') {
       axios.get(
-        `http://localhost:3000/api/questions/bookmarks`,
+        `${process.env.REACT_APP_API_SERVER_URL}/api/questions/bookmarks`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const ProfilePage = () => {
       });
     } else if (activeTab === 'posts') {
       axios.get(
-        `http://localhost:3000/api/questions/user`,
+        `${process.env.REACT_APP_API_SERVER_URL}/api/questions/user`,
         {
           headers: {
             "Content-Type": "application/json",

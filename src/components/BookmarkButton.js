@@ -28,7 +28,7 @@ function BookmarkButton({bookmarks, questionId}) {
   const handleBookmark = () => {
     if (!bookmarked) {
       axios.post(
-        `http://localhost:3000/api/bookmarks/questions/${questionId}`,
+        `${process.env.REACT_APP_API_SERVER_URL}/api/bookmarks/questions/${questionId}`,
         {},
         {
           headers: {
@@ -50,7 +50,7 @@ function BookmarkButton({bookmarks, questionId}) {
         }
       })
     } else {
-      axios.delete(`http://localhost:3000/api/bookmarks/questions/${questionId}`,
+      axios.delete(`${process.env.REACT_APP_API_SERVER_URL}/api/bookmarks/questions/${questionId}`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -28,7 +28,7 @@ const QuestionDetailPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchQuestion = async () => {
-    await axios.get(`http://localhost:3000/api/questions/${questionId}`)
+    await axios.get(`${process.env.REACT_APP_API_SERVER_URL}/api/questions/${questionId}`)
     .then(response => {
       const question = response.data;
 
@@ -61,7 +61,7 @@ const QuestionDetailPage = () => {
 
   const handleDeleteButtonClick = (e) => {
     if (window.confirm('삭제하시겠습니까?')) {
-      axios.delete(`http://localhost:3000/api/questions/${questionId}`,
+      axios.delete(`${process.env.REACT_APP_API_SERVER_URL}/api/questions/${questionId}`,
         {
           headers: {
             "Content-Type": "application/json",

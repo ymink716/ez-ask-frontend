@@ -46,7 +46,7 @@ const EditQuestionPage = () => {
     }
 
     await axios.put(
-      `http://localhost:3000/api/questions/${questionId}`,
+      `${process.env.REACT_APP_API_SERVER_URL}/api/questions/${questionId}`,
       {
         title: data.title,
         content: data.content
