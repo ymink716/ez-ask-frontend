@@ -12,7 +12,6 @@
   min-height: 80px;
   overflow: hidden;
   cursor: pointer;
-  width: 88%;
 }
 
 .commenter-picture {
@@ -38,7 +37,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-
 }
 
 .comment-info-footer {
@@ -60,8 +58,6 @@
   display: flex;
   align-items: center;
 }
-
-
 
 .comment-delete-button {
   display: flex;

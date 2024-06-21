@@ -2,6 +2,7 @@ import React from 'react';
 import './QuestionCard.css';
 import { useNavigate } from "react-router-dom";
 import { FaCommentDots } from "react-icons/fa";
+import { AiFillEye } from "react-icons/ai";
 
 function QuestionCard({ question }) {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function QuestionCard({ question }) {
       <div className='question-info'>
         <p className='date'>{new Date(question.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         <div className='counts'>
+          <p className='views'><AiFillEye />{question.views}</p>
           <p className='comments-count'><FaCommentDots /> {question.comments}</p>
         </div>
       </div>

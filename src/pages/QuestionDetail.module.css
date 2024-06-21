@@ -12,13 +12,32 @@
   margin-bottom: 5px;
 }
 
-.question-createdAt, .question-writer {
+.question-createdAt,
+.question-views, 
+.question-writer {
   display: inline-block;
   font-size: 14px;
 }
 
-.question-createdAt {
+.question-createdAt,
+.question-views {
   float: left;
+}
+
+.question-views {
+  margin-left: 30px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-views-icon {
+  margin-right: 4px;
+  font-size: 18px;
 }
 
 .question-writer {
@@ -45,7 +64,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center; 
-  margin-top: 20px;
+  margin-top: 1px;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .edit-question-button,
@@ -53,7 +74,7 @@
   background-color: #ffffff;
   border: none;
   border-radius: 5px;
-  padding: 10px 10px;
+  padding: 5px 5px;
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -67,7 +88,7 @@
   background-color: #ffffff;
   border: none;
   border-radius: 5px;
-  padding: 10px 10px;
+  padding: 5px 5px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -106,7 +127,7 @@
 }
 
 .comment-modal-header {
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,7 +137,7 @@
 }
 
 .comment-count {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: bold;
 }
 
@@ -135,6 +156,13 @@
   flex: 1;
   overflow-y: auto;
   margin-top: 15px;
+  width: 90%;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+.comment-modal-content::-webkit-scrollbar {
+  display: none;
 }
 
 .comment-modal-footer {

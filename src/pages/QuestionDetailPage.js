@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaCommentDots } from "react-icons/fa";
 import CommentModal from '../components/CommentModal';
 import BookmarkButton from '../components/BookmarkButton';
+import { AiOutlineEye } from "react-icons/ai";
 
 const QuestionDetailPage = () => {
   const params = useParams();
@@ -15,6 +16,7 @@ const QuestionDetailPage = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [views, setViews] = useState(0);
   const [createdAt, setCreatedAt] = useState("");
   const [nickname, setNickname] = useState("");
   const [bookmarks, setBookmarks] = useState();
@@ -32,6 +34,7 @@ const QuestionDetailPage = () => {
 
       setTitle(question.title);
       setContent(question.content);
+      setViews(question.views);
       setCreatedAt(question.createdAt);
       setNickname(question.user.nickname);
       setBookmarks(question.bookmarks);
@@ -91,7 +94,12 @@ const QuestionDetailPage = () => {
     <div className={styles["question-detail"]}>
       <div className={styles["question-detail-header"]}>
         <h2 className={styles["question-title"]}>Q. {title}</h2>
-        <p className={styles["question-createdAt"]}>{new Date(createdAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</p>
+        <p className={styles["question-createdAt"]}>
+          {new Date(createdAt).toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}
+        </p>
+        <p className={styles["question-views"]}>
+          <AiOutlineEye className={styles["question-views-icon"]}/>{views}
+        </p>
         <p className={styles["question-writer"]}>{nickname}</p>
       </div>
       <div className={styles["question-detail-content"]}>
