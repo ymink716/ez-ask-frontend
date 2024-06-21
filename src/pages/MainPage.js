@@ -62,7 +62,11 @@ const MainPage = () => {
 
   const getQuestions = useCallback(async () => {
     const keyword = decodeURI(searchParams.get('search'));
-    const endpoint = keyword && keyword.length > 0 ? `/api/questions?search=${keyword}&page=${page}` : `/api/questions?page=${page}`;
+    const sortOrder = decodeURI(searchParams.get('sort'));
+    
+    const endpoint = keyword && keyword.length > 0 
+      ? `/api/questions?search=${keyword}&page=${page}&sort=${sortOrder}` 
+      : `/api/questions?page=${page}`;
 
     setIsLoading(true);
 

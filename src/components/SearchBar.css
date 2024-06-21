@@ -5,11 +5,20 @@
 
 .search-form {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-input {
-  width: 90%;
+  width: 70%;
   height: 25px;
+  margin-right: 5px;
+}
+
+.search-sort {
+  height: 30px;
+  margin-right: 5px;
 }
 
 .search-button {
