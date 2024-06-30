@@ -27,8 +27,9 @@ jobs:
       
       - name: generate .env file
         run: |
-          echo "${{ secrets.PRODUCTION_ENV }}" >> .production.env
-          cat .production.env
+          touch ..env.production
+          echo "${{ secrets.PRODUCTION_ENV }}" >> .env.production
+          cat .env.production
         
       # 리엑트 프로젝트 빌드
       - name: npm build
