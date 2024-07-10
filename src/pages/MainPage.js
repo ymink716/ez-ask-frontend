@@ -7,6 +7,8 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import QuestionCard from '../components/QuestionCard';
 import LoadingAlarm from '../components/LoadingAlarm';
 
+axios.defaults.baseURL = process.env.REACT_APP_API_SERVER_URL;
+
 const MainPage = () => {
   const [questions, setQuestions] = useState([]);
   const [page, setPage] = useState(1); 
@@ -76,11 +78,12 @@ const MainPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios({
-        method: 'GET',
-        url: `${process.env.REACT_APP_API_SERVER_URL}${endpoint}`,
-      });
-
+      // const response = await axios({
+      //   method: 'GET',
+      //   url: `${process.env.REACT_APP_API_SERVER_URL}${endpoint}`,
+      // });
+      const response = await axios.get(endpoint);
+      console.log(response);
       if (response.data) {
         if (page > 1) {
           setQuestions((prev) => [...prev, ...response.data]);
