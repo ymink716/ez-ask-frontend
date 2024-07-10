@@ -113,7 +113,7 @@ const MainPage = () => {
 
       {!isLoading && questions.length === 0 && search && <EmptyListAlarm />}
 
-      {renderQuestions}
+      {questions && renderQuestions}
 
       {isLoading && <LoadingAlarm />}
 
