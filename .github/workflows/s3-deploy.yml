@@ -15,29 +15,25 @@ jobs:
       - name: git checkout
         uses: actions/checkout@v3
         
-      # node 버전 설정
       - name: setup node
         uses: actions/setup-node@v2.5.2
         with:
           node-version: 20.x
 
-      # npm install 진행(모듈 설치)
-      - name: npm install
-        run: npm install
-      
       - name: generate .env file
         run: |
           touch .env.production
           echo "${{ secrets.PRODUCTION_ENV }}" >> .env.production
           cat .env.production
+      
+      - name: npm install
+        run: npm install
         
-      # 리엑트 프로젝트 빌드
       - name: npm build
         run: npm run build:prod
         env:
           CI: false
       
-      # s3에 배포
       - name: deploy s3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
