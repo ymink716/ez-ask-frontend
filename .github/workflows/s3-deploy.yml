@@ -41,5 +41,13 @@ jobs:
         run:
           # sync: 변경된 파일만 / --delete : 원본경로에서 삭제시 타깃에서도 삭제 
           aws s3 sync --delete --region ap-northeast-2 build s3://${{ secrets.AWS_BUCKET_NAME }}
-      - name: Invalidate CloudFront Cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
+
+      # - name: Invalidate CloudFront Cache
+      #   run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/*"
+
+      - name: CloudFront Invalidation
+        env:
+          CLOUD_FRONT_ID: ${{ secrets.AWS_DISTRIBUTION_ID }}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id $CLOUD_FRONT_ID --paths /*
