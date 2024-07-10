@@ -82,7 +82,8 @@ const MainPage = () => {
       //   method: 'GET',
       //   url: `${process.env.REACT_APP_API_SERVER_URL}${endpoint}`,
       // });
-      const response = await axios.get(endpoint);
+      // const response = await axios.get(endpoint);
+      const response = await axios.get(`https://api.ez-ask.net${endpoint}`)
       console.log(response);
       if (response.data) {
         if (page > 1) {
